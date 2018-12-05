@@ -11,6 +11,14 @@ I have chosen [Armbian Stretch](https://www.armbian.com/tinkerboard/) which is a
 - Start `$ sudo /etc/init.d/smbd start`
 - Stop `$ sudo /etc/init.d/smbd stop`
 - Restart `$ sudo /etc/init.d/smbd restart`
+- Configure `sudo vi /etc/samba/smb.conf` go to the bottom of the line and add the following:
+```
+         [harddrive] (your choice)
+         comment = Hard Disk Western Digital (your choice)
+         path = /media/mycloud (the path you want to share)
+         readonly = no
+         browsable = yes (if you want to read and write)
+```
 
 ## Webmin (Optional)
 Then I actually wanted to instal Webmin. Webmin is a dashboard where you can configurey things for your server such as file manager, editing samba file sharing system, monitoring your system and make your life very easier. The installation process are [here](http://www.webmin.com/deb.html) and see **Using the Webmin APT repository**
