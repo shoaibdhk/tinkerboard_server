@@ -6,7 +6,13 @@ I am not an expert. This is not finished yet. There are something I still couldn
 ## Choosing OS
 I have chosen [Armbian Stretch](https://www.armbian.com/tinkerboard/) which is a very lightweight OS and a debian based linux system. Since I am going to use a headless server, I strongly recommend this OS. I always had issue with TinkerOS. I don't why everytime I tried to update my distro it gives me issues. I like its `armbian config` where you can just simply type `sudo armbian-config`and you can easily configure from the terminal. For more infor you can visit [Armbian Doc](https://docs.armbian.com/) to get started.
 
-## Webmin
+## Samba
+[Samba](https://www.samba.org) is a file sharing system when you are within the same wifi/network. You can create a network on you system. Installation is very easy. Here is the [full and easy instruction](https://tutorials.ubuntu.com/tutorial/install-and-configure-samba#0). Even though it is a Ubuntu link but it works since it uses debian system. Something I just want to add:
+- Start `$ sudo /etc/init.d/smbd start`
+- Stop `$ sudo /etc/init.d/smbd stop`
+- Restart `$ sudo /etc/init.d/smbd restart`
+
+## Webmin (Optional)
 Then I actually wanted to instal Webmin. Webmin is a dashboard where you can configurey things for your server such as file manager, editing samba file sharing system, monitoring your system and make your life very easier. The installation process are [here](http://www.webmin.com/deb.html) and see **Using the Webmin APT repository**
 But I have had an issue when installing its dependency `apt-get-versions`. When I tried to install I got this error:
 ```
