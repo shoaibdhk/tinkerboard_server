@@ -7,7 +7,7 @@ I am not an expert. This is not finished yet. There are something I still couldn
 I have chosen [Armbian Stretch](https://www.armbian.com/tinkerboard/) which is a very lightweight OS and a debian based linux system. Since I am going to use a headless server, I strongly recommend this OS. I always had issue with TinkerOS. I don't why everytime I tried to update my distro it gives me issues. I like its `armbian config` where you can just simply type `sudo armbian-config`and you can easily configure from the terminal. For more infor you can visit [Armbian Doc](https://docs.armbian.com/) to get started.
 
 ## Samba
-[Samba](https://www.samba.org) is a file sharing system when you are within the same wifi/network. You can create a network on you system. Installation is very easy. Here is the [full and easy instruction](https://tutorials.ubuntu.com/tutorial/install-and-configure-samba#0). Even though it is a Ubuntu link but it works since it uses debian system. Something I just want to add:
+[Samba](https://www.samba.org) is a file sharing system when you are within the same wifi/network. You can create a network on you system. Installation is very easy. Here is the [full and easy instruction](https://tutorials.ubuntu.com/tutorial/install-and-configure-samba#0). Even though it is a Ubuntu link but it works since it uses debian system. I saw some videos where people says **WORKGROUP** has to be same as current Desktop's **WORKGROUP**, you don't need to do that. Simply add you network location with the `ip_address` Something I just want to add:
 - Start `$ sudo /etc/init.d/smbd start`
 - Stop `$ sudo /etc/init.d/smbd stop`
 - Restart `$ sudo /etc/init.d/smbd restart`
@@ -48,6 +48,11 @@ I find installing NextCloudPi easier that installing NextCloud manually. When I 
 ```
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
 I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me.
+
+### Some Notes
+
+- When I tried to format my hard disk for keeping the nextcloud data I could not do it via browser I actually had to it via `ncp-config`
+
 
 ## Linking with Domain
 Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. 
