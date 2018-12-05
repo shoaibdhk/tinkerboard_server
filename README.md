@@ -35,7 +35,7 @@ After that I tried to install `apt-show-versions` by the following command:
 ```
 Then All you just have to type `your_ip:10000` and sign in with your username and password that has **root previliges**.
 
-##NextCloud
+## NextCloud
 I find installing NextCloudPi easier that installing NextCloud manually. When I run the following command:
 ```
 # curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
