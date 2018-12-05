@@ -19,7 +19,7 @@ Errors were encountered while processing:
 E: Sub-process /usr/bin/dpkg returned an error code (1)
 
 ```
-Then I found the solution from [this link] (https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container)
+Then I found the solution from [this link](https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container)
 All you just have to do the following.(#):
 
 ```
@@ -41,4 +41,7 @@ I find installing NextCloudPi easier that installing NextCloud manually. When I 
 # curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 ```
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
+I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me.
 
+## Linking with Domain
+Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. 
