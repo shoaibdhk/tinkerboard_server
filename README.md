@@ -73,6 +73,12 @@ I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O
 
 - When I tried to format my hard disk for keeping the nextcloud data I could not do it via browser I actually had to it via `ncp-config`
 
+### Docker
+I don't know much about docker but I couldn't install via `armbian-config`. I tried to install via 
+
+```
+curl -sSL https://get.docker.com | sh
+```
 
 ## Linking with Domain
 Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. 
