@@ -70,7 +70,7 @@ $ sudo a2enconf phpmyadmin.conf
 $ sudo service apache2 reload
 ```
 
-For reference [1](https://stackoverflow.com/questions/10769148/extension-mysqli-is-missing-phpmyadmin-doesnt-work) [2](https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache)
+**For reference** [PHP1](https://stackoverflow.com/questions/10769148/extension-mysqli-is-missing-phpmyadmin-doesnt-work) [PHP2](https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache)
 ## NextCloud
 
 ### NextCloudPi
