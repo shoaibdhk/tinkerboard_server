@@ -77,7 +77,7 @@ I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O
 I don't know much about docker but I couldn't install via `armbian-config`. I tried to install via 
 
 ```
-curl -sSL https://get.docker.com | sh
+# curl -sSL https://get.docker.com | sh
 ```
 
 ## Linking with Domain
