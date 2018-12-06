@@ -62,12 +62,37 @@ Installing LAMP Stack is easy, but activating PHPMyAdmin I found some difficulti
 
 For reference [1](https://stackoverflow.com/questions/10769148/extension-mysqli-is-missing-phpmyadmin-doesnt-work) [2](https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache)
 ## NextCloud
+
+### NextCloudPi
 I find installing NextCloudPi easier that installing NextCloud manually. When I run the following command:
 ```
 # curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 ```
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
 I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me.
+
+### Installing without NextCloudPi
+Installing without NextCloudPi is pretty hard but still I wanted to do that because I can't browse web after installing NextCloudPi. That is the problem. Here are some instructions:
+
+- I tried to installed with snap package, which you can install via `sudo apt install snapd`
+- Here is the [documentation](https://docs.nextcloud.com/server/14/admin_manual/installation/source_installation.html#) for that
+- **Very Importnat**: You have to create a `/etc/apache2/sites-available/nextcloud.conf` file with these lines in it:
+```
+Alias /nextcloud "/var/www/nextcloud/"
+
+<Directory /var/www/nextcloud/>
+  Options +FollowSymlinks
+  AllowOverride All
+
+ <IfModule mod_dav.c>
+  Dav off
+ </IfModule>
+
+ SetEnv HOME /var/www/nextcloud
+ SetEnv HTTP_HOME /var/www/nextcloud
+
+</Directory>
+```
 
 ### Some Notes
 
