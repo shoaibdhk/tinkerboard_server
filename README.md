@@ -53,12 +53,22 @@ Then All you just have to type `your_ip:10000` and sign in with your username an
 Installing LAMP Stack is easy, but activating PHPMyAdmin I found some difficulties. It keep saying missing. So I just want to keep all my solutions here.
 - First install some dependencies: 
 ```               
-                  $ sudo apt-get install php-mbstring php7.0-mbstring php-gettext libapache2-mod-php7.0
+               $ sudo apt-get install php-mbstring php7.0-mbstring php-gettext libapache2-mod-php7.0
 ```
 - restart `apache2` and `mysql`
   - `sudo /etc/init.d/apache2 restart`
   - `sudo /etc/init.d/mysql restart`
 - Then link in `/var/www` like this: `$ sudo ln -s /usr/share/phpmyadmin /var/www/`
+- Open apache.conf using your favorite editor, mine is vim: `sudo vim /etc/apache2/apache2.conf`
+
+Then add the following line: `Include /etc/phpmyadmin/apache.conf`
+
+- Then
+```
+$ sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+$ sudo a2enconf phpmyadmin.conf
+$ sudo service apache2 reload
+```
 
 For reference [1](https://stackoverflow.com/questions/10769148/extension-mysqli-is-missing-phpmyadmin-doesnt-work) [2](https://askubuntu.com/questions/387062/how-to-solve-the-phpmyadmin-not-found-issue-after-upgrading-php-and-apache)
 ## NextCloud
