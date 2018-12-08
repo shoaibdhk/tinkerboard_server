@@ -81,7 +81,7 @@ I find installing NextCloudPi easier that installing NextCloud manually. When I 
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
 I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me.
 
-### Installing without NextCloudPi
+### Without NextCloudPi
 Installing without NextCloudPi is pretty hard but still I wanted to do that because I can't browse web after installing NextCloudPi. That is the problem. Here are some instructions:
 
 - I tried to installed with snap package, which you can install via `sudo apt install snapd`
@@ -103,6 +103,7 @@ Alias /nextcloud "/var/www/nextcloud/"
 
 </Directory>
 ```
+- __increasing the Upload Size:__ To increase the upload size you have configure in both `php.ini` in you main php config and `.htaccess` in `/var/www/nextcloud` Here is [the documentation](https://docs.nextcloud.com/server/14/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=limit)
 
 ### Some Notes
 
