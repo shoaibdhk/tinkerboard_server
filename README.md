@@ -103,7 +103,9 @@ Alias /nextcloud "/var/www/nextcloud/"
 
 </Directory>
 ```
-- __increasing the Upload Size:__ To increase the upload size you have configure in both `php.ini` in you main php config and `.htaccess` in `/var/www/nextcloud` Here is [the documentation](https://docs.nextcloud.com/server/14/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=limit)
+- __increasing the Upload Size:__ To increase the upload size you have configure in both `php.ini` in you main php config and `.htaccess` in `/var/www/nextcloud` Here is [the documentation](https://docs.nextcloud.com/server/14/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=limit). In documentation, it doesn't show how to configure in php, so I took a screenshot.
+![Config upload size for php.ini](tinkerboard_server/config_upload_size.jpg)
+      
 
 ### Some Notes
 
