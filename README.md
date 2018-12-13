@@ -79,10 +79,11 @@ I find installing NextCloudPi easier that installing NextCloud manually. When I 
 # curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 ```
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
-I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me.
+
 
 ### Without NextCloudPi
-Installing without NextCloudPi is pretty hard but still I wanted to do that because I can't browse web after installing NextCloudPi. That is the problem. Here are some instructions:
+Installing without NextCloudPi is pretty hard but still I wanted to do that because I can't browse web after installing NextCloudPi.
+I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O_ilbw), this works for me. That is the problem. Here are some instructions:
 
 - I tried to installed with snap package, which you can install via `sudo apt install snapd`
 - Here is the [documentation](https://docs.nextcloud.com/server/14/admin_manual/installation/source_installation.html#) for that
