@@ -20,6 +20,14 @@ I have chosen [Armbian Stretch](https://www.armbian.com/tinkerboard/) which is a
          browsable = yes (if you want to read and write)
 ```
 
+## Installing LAMP Stack
+- I had an issue with installing php version 7.2 with debian 9. Then I found this [link](https://tecadmin.net/install-php-debian-9-stretch/). I had to import package signing key by entering this:
+```
+$ sudo apt install ca-certificates apt-transport-https 
+$ wget -q https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
+$ echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
+```
+
 ## Webmin (Optional)
 Then I actually wanted to instal Webmin. Webmin is a dashboard where you can configurey things for your server such as file manager, editing samba file sharing system, monitoring your system and make your life very easier. The installation process are [here](http://www.webmin.com/deb.html) and see **Using the Webmin APT repository**
 But I have had an issue when installing its dependency `apt-get-versions`. When I tried to install I got this error:
