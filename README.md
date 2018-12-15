@@ -126,7 +126,56 @@ I don't know much about docker but I couldn't install via `armbian-config`. I tr
 ```
 # curl -sSL https://get.docker.com | sh
 ```
+## Partioning and format Drive
+Using Linux CLI, we can format our drive in any format using `fdisk`. 
+- First check that you disk has been recognized. To check that simply type:
+```
+# fdisk -l
+Disk /dev/zram4: 250.8 MiB, 262959104 bytes, 64199 sectors
+Units: sectors of 1 * 4096 = 4096 bytes
+Sector size (logical/physical): 4096 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
 
+
+Disk /dev/sda: 477 GiB, 512110190592 bytes, 1000215216 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 064B8616-86EE-485B-8BA5-0B2BE95DA67F
+
+Device     Start        End    Sectors  Size Type
+/dev/sda1   2048 1000215182 1000213135  477G Linux filesystem
+```
+If you see something like `/dev/sda1`, it means you already have partition. If you want to delete the partition, you have to do the following:
+```
+# fdisk dev/sda
+Command (m for help): d
+```
+- We're not finished yet. Now we are going to create a partition
+```
+Command (m for help): n
+Select (default p): p
+Partition number (1-4, default 1): 1
+First sector (starting-ending, default starting): starting
+Last sector, +sectors or +size{K,M,G} (starting-ending, default ending): ending
+Command (m for help): w
+```
+on `starting` and `ending` there will be numbers. Here I just have created the whole disk as one partition. You can adjust the number to make more than one partition.
+- You will then need to format using `mkfs`. 
+  - If you want to format in `ext3` or `ext4`:
+  ```
+  # mkfs.ext4 /dev/sda1
+  ```
+  - If you want to format in `ntfs`:
+  ```
+  # mkfs.ntfs /dev/sda1
+  ```
+  - If you want to format `fat`:
+  ```
+  # mkfs.vfat /dev/sda1
+  ```
+For future [reference](https://unix.stackexchange.com/questions/185382/how-to-create-a-new-partitioning-table-on-sd-card-from-the-command-line)
 ## Let's Encrypt
 It provides free SSL Certificate for your domain [Certbot's website](https://certbot.eff.org/lets-encrypt/debianstretch-apache) explains a lot about this. This website is very usefull how to encrypt the website.
 ## Linking with Domain
