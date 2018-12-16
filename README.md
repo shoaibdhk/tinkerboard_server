@@ -124,7 +124,8 @@ Alias /nextcloud "/var/www/nextcloud/"
 ```
 - __increasing the Upload Size:__ To increase the upload size you have configure in both `php.ini` in you main php config and `.htaccess` in `/var/www/nextcloud` Here is [the documentation](https://docs.nextcloud.com/server/14/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=limit). In documentation, it doesn't show how to configure in php, so I took a screenshot.
 ![Config upload size for php.ini](config_upload_size.jpg)
-      
+- **Eliminate Security & setup Warning**: To fix the issue for OPcache, here is the [documentation]
+      ![Config OPcache for php.ini](config_OPcache.jpg)
 
 ### Some Notes
 
@@ -214,7 +215,7 @@ It provides free SSL Certificate for your domain [Certbot's website](https://cer
 ```
 Please choose the option carefully specially when says redirect to 
 ## Linking with Domain
-Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. So far I have got some solutions of this:
+First, I open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. So far I have got some solutions of this:
 - I created a conf file and have added the following:
 ```
 <VirtualHost *:80>
@@ -222,8 +223,22 @@ Now here I got stuck, I didn't found any useful information how should I link my
     ServerName webjenie.com
     ServerAlias www.webjenie.com
     DocumentRoot /var/www/html
-    Redirect / https://webjenie.com/
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+- Enabling the New Virtual Host Files
+  - Activate the site:
+  ```
+  $ sudo a2ensite example.com.conf
+  ```
+  - Disabling the the default site defined in `000-default.conf`
+  ```
+  $ sudo a2dissite 000-default.conf
+  ```
+  - restart Apache:
+  ```
+  $ sudo systemctl restart apache2
+  ```
+For reference: [1](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-debian-8)
+  
