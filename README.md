@@ -126,6 +126,8 @@ Alias /nextcloud "/var/www/nextcloud/"
 ![Config upload size for php.ini](config_upload_size.jpg)
 - **Eliminate Security & setup Warning**: To fix the issue for OPcache, here is the [documentation](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/server_tuning.html#enable-php-opcache)
       ![Config OPcache for php.ini](config_OPcache.png)
+- **BigInt**: [documentation](https://docs.nextcloud.com/server/15/admin_manual/configuration_database/bigint_identifiers.html)
+- **HTTPS STRICT** [Documentation](https://docs.nextcloud.com/server/15/admin_manual/configuration_server/harden_server.html#enable-http-strict-transport-security)
 
 ### Some Notes
 
