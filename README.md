@@ -112,6 +112,16 @@ Alias /nextcloud "/var/www/nextcloud/"
 
 </Directory>
 ```
+- I need to config my Virtual host something like this for nextcloud since I wanted to use it as different subdomain `mycloud.example.com`. To config this I add the following on `/etc/apache2/sites-available/nextcloud.conf`:
+```
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName mycloud.example.com
+    DocumentRoot /var/www/nextcloud
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 - __increasing the Upload Size:__ To increase the upload size you have configure in both `php.ini` in you main php config and `.htaccess` in `/var/www/nextcloud` Here is [the documentation](https://docs.nextcloud.com/server/14/admin_manual/configuration_files/big_file_upload_configuration.html?highlight=limit). In documentation, it doesn't show how to configure in php, so I took a screenshot.
 ![Config upload size for php.ini](config_upload_size.jpg)
       
@@ -177,6 +187,43 @@ on `starting` and `ending` there will be numbers. Here I just have created the w
   ```
 For future [reference](https://unix.stackexchange.com/questions/185382/how-to-create-a-new-partitioning-table-on-sd-card-from-the-command-line)
 ## Let's Encrypt
-It provides free SSL Certificate for your domain [Certbot's website](https://certbot.eff.org/lets-encrypt/debianstretch-apache) explains a lot about this. This website is very usefull how to encrypt the website.
+It provides free SSL Certificate for your domain [Certbot's website](https://certbot.eff.org/lets-encrypt/debianstretch-apache) explains a lot about this. This website is very usefull how to encrypt the website. I wanted to use SSL with cloudflare. Certbot has a plugin to do that.
+- first you have to install the cloudflare plugin for certbot:
+```
+# apt install python3-pip
+# pip3 install certbot-dns-cloudflare
+```
+- **Now this part is very important**. Since we're going to use CloudFlare's DNS to verify our domain for Let's Encrypt, Certbot will need to use CloudFlare's API to create some verification DNS records on the fly. To get the API key, you need to login you CloudFlare dashboard, go to you profile and at the bottom, you need to click "View" next to "Global API key". This key is more than a password. If anyone use it, they don't need even two factor authentication. Now, store this credentials on your server, in a file that is readable by root only. I have stored them in `/root/.secrets/cloudflare.ini`
+  - The directory should only be accessible by root:
+  ```
+  $ sudo chmod 0700 /root/.secrets/
+  ```
+  - The files too:
+  ```
+  $ sudo chmod 0400 /root/.secrets/cloudflare.ini
+  ```
+  - Now replace the email address and API key with your email address and API associated with your CloudFlare:
+  ```
+  dns_cloudflare_email = "youremail@example.com"
+  dns_cloudflare_api_key = "4003c330b45f4fbcab420eaf66b4c5cbcab4"
+  ```
+
+- To obtain a certificate:
+```
+# certbot -i apache --dns-cloudflare --dns-cloudflare-credentials ~/.secrets/cloudflare.ini --dns-cloudflare-propagation-seconds 60 -d example.com -d "*.example.com" --server https://acme-v02.api.letsencrypt.org/directory
+```
+Please choose the option carefully specially when says redirect to 
 ## Linking with Domain
-Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. 
+Now here I got stuck, I didn't found any useful information how should I link my nextcloud outside of the network. I have realized that I have open port 80 and 443 in my router and also reserve a fix internal IP address and I configure that in my router. So far I have got some solutions of this:
+- I created a conf file and have added the following:
+```
+<VirtualHost *:80>
+    ServerAdmin admin@webjenie.com
+    ServerName webjenie.com
+    ServerAlias www.webjenie.com
+    DocumentRoot /var/www/html
+    Redirect / https://webjenie.com/
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
