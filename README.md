@@ -44,7 +44,7 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 Then I found the solution from [this link](https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container)
 All you just have to do the following.(#):
 
-```shell
+```bash
 # rm /etc/apt/apt.conf.d/docker-gzip-indexes
 # apt-get purge apt-show-versions
 # rm /var/lib/apt/lists/*lz4
