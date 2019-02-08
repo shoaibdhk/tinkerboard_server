@@ -22,10 +22,10 @@ I have chosen [Armbian Stretch](https://www.armbian.com/tinkerboard/) which is a
 
 ## Installing LAMP Stack
 - I had an issue with installing php version 7.2 with debian 9. Then I found this [link](https://tecadmin.net/install-php-debian-9-stretch/). I had to import package signing key by entering this:
-```
-$ sudo apt install ca-certificates apt-transport-https 
-$ wget -q https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
-$ echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
+```bash
+ sudo apt install ca-certificates apt-transport-https 
+ wget -q https://packages.sury.org/php/apt.gpg -O- | sudo apt-key add -
+ echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
 ```
 
 ## Webmin (Optional)
