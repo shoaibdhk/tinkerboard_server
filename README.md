@@ -45,10 +45,10 @@ Then I found the solution from [this link](https://askubuntu.com/questions/91619
 All you just have to do the following.(#):
 
 ```bash
-# rm /etc/apt/apt.conf.d/docker-gzip-indexes
-# apt-get purge apt-show-versions
-# rm /var/lib/apt/lists/*lz4
-# apt-get -o Acquire::GzipIndexes=false update
+rm /etc/apt/apt.conf.d/docker-gzip-indexes
+ apt-get purge apt-show-versions
+ rm /var/lib/apt/lists/*lz4
+ apt-get -o Acquire::GzipIndexes=false update
 
 ```
 After that I tried to install `apt-show-versions` by the following command:
