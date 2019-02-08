@@ -44,7 +44,7 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 Then I found the solution from [this link](https://askubuntu.com/questions/916199/install-apt-show-versions-inside-an-ubuntu-docker-container)
 All you just have to do the following.(#):
 
-```
+```shell
 # rm /etc/apt/apt.conf.d/docker-gzip-indexes
 # apt-get purge apt-show-versions
 # rm /var/lib/apt/lists/*lz4
@@ -52,7 +52,7 @@ All you just have to do the following.(#):
 
 ```
 After that I tried to install `apt-show-versions` by the following command:
-```
+```shell
 # apt-get install apt-show-versions
 ```
 Then All you just have to type `your_ip:10000` and sign in with your username and password that has **root previliges**.
@@ -60,7 +60,7 @@ Then All you just have to type `your_ip:10000` and sign in with your username an
 ## PHPMyAdmin
 Installing LAMP Stack is easy, but activating PHPMyAdmin I found some difficulties. It keep saying missing. So I just want to keep all my solutions here.
 - First install some dependencies: 
-```               
+```  shell             
                $ sudo apt-get install php-mbstring php7.0-mbstring php-gettext libapache2-mod-php7.0
 ```
 - restart `apache2` and `mysql`
@@ -72,7 +72,7 @@ Installing LAMP Stack is easy, but activating PHPMyAdmin I found some difficulti
 Then add the following line: `Include /etc/phpmyadmin/apache.conf`
 
 - Then
-```
+```shell
 $ sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
 $ sudo a2enconf phpmyadmin.conf
 $ sudo service apache2 reload
@@ -83,7 +83,7 @@ $ sudo service apache2 reload
 
 ### NextCloudPi
 I find installing NextCloudPi easier that installing NextCloud manually. When I run the following command:
-```
+```shell
 # curl -sSL https://raw.githubusercontent.com/nextcloud/nextcloudpi/master/install.sh | bash
 ```
 This will install LAMP stack and automatically configure the process but I don't know if it right or not because I also want to use this server as a web server too. So its tempting. I am still gonna use this.
@@ -96,7 +96,7 @@ I found a better instruction in [youtube](https://www.youtube.com/watch?v=oIYg2O
 - I tried to installed with snap package, which you can install via `sudo apt install snapd`
 - Here is the [documentation](https://docs.nextcloud.com/server/14/admin_manual/installation/source_installation.html#) for that
 - **Very Importnat**: You have to create a `/etc/apache2/sites-available/nextcloud.conf` file with these lines in it:
-```
+```php
 Alias /nextcloud "/var/www/nextcloud/"
 
 <Directory /var/www/nextcloud/>
@@ -113,7 +113,7 @@ Alias /nextcloud "/var/www/nextcloud/"
 </Directory>
 ```
 - I need to config my Virtual host something like this for nextcloud since I wanted to use it as different subdomain `mycloud.example.com`. To config this I add the following on `/etc/apache2/sites-available/nextcloud.conf`:
-```
+```php
 <VirtualHost *:80>
     ServerAdmin admin@example.com
     ServerName mycloud.example.com
@@ -136,13 +136,13 @@ Alias /nextcloud "/var/www/nextcloud/"
 ### Docker
 I don't know much about docker but I couldn't install via `armbian-config`. I tried to install via 
 
-```
+```shell
 # curl -sSL https://get.docker.com | sh
 ```
 ## Partioning and format Drive
 Using Linux CLI, we can format our drive in any format using `fdisk`. 
 - First check that you disk has been recognized. To check that simply type:
-```
+```shell
 # fdisk -l
 Disk /dev/zram4: 250.8 MiB, 262959104 bytes, 64199 sectors
 Units: sectors of 1 * 4096 = 4096 bytes
@@ -161,12 +161,12 @@ Device     Start        End    Sectors  Size Type
 /dev/sda1   2048 1000215182 1000213135  477G Linux filesystem
 ```
 If you see something like `/dev/sda1`, it means you already have partition. If you want to delete the partition, you have to do the following:
-```
+```shell
 # fdisk dev/sda
 Command (m for help): d
 ```
 - We're not finished yet. Now we are going to create a partition
-```
+```shell
 Command (m for help): n
 Select (default p): p
 Partition number (1-4, default 1): 1
@@ -177,22 +177,22 @@ Command (m for help): w
 on `starting` and `ending` there will be numbers. Here I just have created the whole disk as one partition. You can adjust the number to make more than one partition.
 - You will then need to format using `mkfs`. 
   - If you want to format in `ext3` or `ext4`:
-  ```
+  ```shell
   # mkfs.ext4 /dev/sda1
   ```
   - If you want to format in `ntfs`:
-  ```
+  ```shell
   # mkfs.ntfs /dev/sda1
   ```
   - If you want to format `fat`:
-  ```
+  ```shell
   # mkfs.vfat /dev/sda1
   ```
 For future [reference](https://unix.stackexchange.com/questions/185382/how-to-create-a-new-partitioning-table-on-sd-card-from-the-command-line)
 ## Let's Encrypt
 It provides free SSL Certificate for your domain [Certbot's website](https://certbot.eff.org/lets-encrypt/debianstretch-apache) explains a lot about this. This website is very usefull how to encrypt the website. I wanted to use SSL with cloudflare. Certbot has a plugin to do that.
 - first you have to install the cloudflare plugin for certbot:
-```
+```shell
 # apt install python3-pip
 # pip3 install certbot-dns-cloudflare
 ```
@@ -212,7 +212,7 @@ It provides free SSL Certificate for your domain [Certbot's website](https://cer
   ```
 
 - To obtain a certificate:
-```
+```shell
 # certbot -i apache --dns-cloudflare --dns-cloudflare-credentials ~/.secrets/cloudflare.ini --dns-cloudflare-propagation-seconds 60 -d example.com -d "*.example.com" --server https://acme-v02.api.letsencrypt.org/directory
 ```
 Please choose the option carefully specially when says redirect to 
@@ -235,11 +235,11 @@ First, I open port 80 and 443 in my router and also reserve a fix internal IP ad
   $ sudo a2ensite example.com.conf
   ```
   - Disabling the the default site defined in `000-default.conf`
-  ```
+  ```shell
   $ sudo a2dissite 000-default.conf
   ```
   - restart Apache:
-  ```
+  ```shell
   $ sudo systemctl restart apache2
   ```
 For reference: [1](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-debian-8)
